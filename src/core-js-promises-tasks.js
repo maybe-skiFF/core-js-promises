@@ -140,8 +140,15 @@ function getAllResult(promises) {
  * [promise1, promise4, promise3] => Promise.resolved('104030')
  * [promise1, promise4, promise3, promise2] => Promise.resolved('10403020')
  */
-function queuPromises(/* promises */) {
-  throw new Error('Not implemented');
+function queuPromises(promises) {
+  let promRes = Promise.resolve('');
+  promises.forEach((prom) => {
+    promRes = promRes.then(async (data) => {
+      const data1 = await prom;
+      return data + data1;
+    });
+  });
+  return promRes;
 }
 
 module.exports = {
